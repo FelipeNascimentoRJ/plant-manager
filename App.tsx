@@ -1,20 +1,10 @@
 import React from 'react';
-import { StyleSheet, View, Text } from 'react-native';
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
+import WelcomeScreen from './src/screens/welcome'
 
 const App = () => {
-
   return (
-    <View style={styles.container}>
-      <Text>NLW5</Text>
-    </View>
+    <WelcomeScreen />
   );
 };
 
