@@ -64,7 +64,6 @@ const IdentificationScreen = () => {
               onPress={onPressButton}
               disabled={!isInputFilled}
             />
-
           </Footer>
         </Form>
       </Container>

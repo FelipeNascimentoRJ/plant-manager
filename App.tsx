@@ -7,7 +7,8 @@ import {
 } from '@expo-google-fonts/jost';
 
 // import WelcomeScreen from './src/screens/welcome';
-import IdentificationScreen from './src/screens/indentification';
+// import IdentificationScreen from './src/screens/indentification';
+import ConfirmationScreen from './src/screens/confirmation';
 
 const App = () => {
   const [fontsLoaded] = useFonts({
@@ -19,7 +20,7 @@ const App = () => {
     return <AppLoading />;
   }
 
-  return <IdentificationScreen />;
+  return <ConfirmationScreen />;
 };
 
 export default App;
