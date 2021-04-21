@@ -6,6 +6,7 @@ import colors from '../../utils/colors';
 export const Screen = styled.SafeAreaView`
   flex: 1;
   align-items: center;
+  color: ${colors.white};
 `;
 
 export const Container = styled.View`

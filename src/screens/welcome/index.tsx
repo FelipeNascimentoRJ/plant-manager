@@ -1,4 +1,5 @@
 import React from 'react';
+import { useNavigation } from '@react-navigation/core';
 
 import {
   Screen,
@@ -18,8 +19,10 @@ const data = {
 };
 
 const WelcomeScreen = () => {
+  const navigation = useNavigation();
+
   const onPressButton = () => {
-    console.log('onPressButton');
+    navigation.navigate('IdentificationScreen');
   };
 
   return (

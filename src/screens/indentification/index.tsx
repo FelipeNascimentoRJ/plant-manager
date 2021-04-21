@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useNavigation } from '@react-navigation/core';
 
 import {
   Screen,
@@ -21,6 +22,8 @@ const data = {
 };
 
 const IdentificationScreen = () => {
+  const navigation = useNavigation();
+
   const [name, setName] = useState<string>();
   const [isInputFocused, setIsInputFocused] = useState<boolean>(false);
   const [isInputFilled, setIsInputFilled] = useState<boolean>(false);
@@ -40,7 +43,7 @@ const IdentificationScreen = () => {
   };
 
   const onPressButton = () => {
-    console.log('onPressButton');
+    navigation.navigate('ConfirmationScreen');
   };
 
   return (

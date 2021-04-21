@@ -9,6 +9,7 @@ const { width } = Dimensions.get('window');
 
 export const Screen = styled.SafeAreaView`
   flex: 1;
+  color: ${colors.white};
 `;
 
 export const Container = styled.View`
