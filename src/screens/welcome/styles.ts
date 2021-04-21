@@ -2,11 +2,17 @@ import { Dimensions } from 'react-native';
 import { Feather } from '@expo/vector-icons';
 import styled from 'styled-components/native';
 
+import fonts from '../../utils/fonts';
 import colors from '../../utils/colors';
 
 const { width } = Dimensions.get('window');
 
-export const Container = styled.SafeAreaView`
+export const Screen = styled.SafeAreaView`
+  flex: 1;
+`;
+
+export const Container = styled.View`
+  padding: 0 20px;
   flex: 1;
   align-items: center;
   justify-content: space-around;
@@ -14,9 +20,11 @@ export const Container = styled.SafeAreaView`
 
 export const Title = styled.Text`
   margin-top: 38px;
+  font-family: ${fonts.heading};
   font-size: 32px;
   font-weight: bold;
   text-align: center;
+  line-height: 38px;
   color: ${colors.heading};
 `;
 
@@ -27,6 +35,7 @@ export const Image = styled.Image.attrs({ resizeMode: "contain" })`
 
 export const Description = styled.Text`
   padding: 0 20px;
+  font-family: ${fonts.text};
   font-size: 18px;
   text-align: center;
   color: ${colors.heading};
