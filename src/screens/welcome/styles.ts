@@ -1,4 +1,5 @@
 import { Dimensions } from 'react-native';
+import { Feather } from '@expo/vector-icons';
 import styled from 'styled-components/native';
 
 import colors from '../../utils/colors';
@@ -41,7 +42,7 @@ export const Button = styled.TouchableOpacity`
   border-radius: 16px;
 `;
 
-export const ButtonLabel = styled.Text`
-  font-size: 24px;
+export const ButtonIcon = styled(Feather).attrs({ name: "chevron-right" })`
+  font-size: 32px;
   color: ${colors.white}
 `;

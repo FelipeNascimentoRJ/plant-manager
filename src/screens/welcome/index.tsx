@@ -6,7 +6,7 @@ import {
   Image,
   Description,
   Button,
-  ButtonLabel
+  ButtonIcon,
 } from './styles';
 
 import wateringImg from '../../assets/watering.png';
@@ -30,7 +30,7 @@ const WelcomeScreen = () => {
         onPress={onPressButton}
         activeOpacity={0.7}
       >
-        <ButtonLabel>{'>'}</ButtonLabel>
+        <ButtonIcon />
       </Button>
     </Container>
   );
