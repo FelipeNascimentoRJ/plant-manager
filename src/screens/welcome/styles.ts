@@ -1,11 +1,14 @@
+import { Dimensions } from 'react-native';
 import styled from 'styled-components/native';
 
 import colors from '../../utils/colors';
 
+const { width } = Dimensions.get('window');
+
 export const Container = styled.SafeAreaView`
   flex: 1;
   align-items: center;
-  justify-content: space-between;
+  justify-content: space-around;
 `;
 
 export const Title = styled.Text`
@@ -16,8 +19,8 @@ export const Title = styled.Text`
   color: ${colors.heading};
 `;
 
-export const Image = styled.Image`
-  width: 292px;
+export const Image = styled.Image.attrs({ resizeMode: "contain" })`
+  width: ${width * 0.7}px;
   height: 284px;
 `;
 
