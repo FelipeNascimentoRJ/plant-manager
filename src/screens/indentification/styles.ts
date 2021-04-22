@@ -1,4 +1,4 @@
-import { Platform, TextInputProps } from 'react-native';
+import { Keyboard, Platform, TextInputProps } from 'react-native';
 import styled from 'styled-components/native';
 
 import fonts from '../../utils/fonts';
@@ -18,6 +18,12 @@ export const Container = styled.KeyboardAvoidingView.attrs({
   flex: 1;
   width: 100%;
 `;
+
+export const Feedback = styled.TouchableWithoutFeedback.attrs({
+  onPress: () => {
+    Keyboard.dismiss();
+  },
+})``;
 
 export const Form = styled.View`
   flex: 1;

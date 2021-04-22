@@ -3,6 +3,7 @@ import { useNavigation } from '@react-navigation/core';
 
 import {
   Screen,
+  Feedback,
   Container,
   Form,
   Emoji,
@@ -49,26 +50,28 @@ const IdentificationScreen = () => {
   return (
     <Screen>
       <Container>
-        <Form>
-          <>
-            <Emoji>{isInputFilled ? data.emojiFilled : data.emoji}</Emoji>
-            <Title>{data.title}</Title>
-            <Input
-              placeholder={data.inputPlaceholder}
-              onBlur={onInputBlur}
-              onFocus={onInputFocus}
-              onChangeText={onInputChange}
-              isInputValid={isInputFocused || isInputFilled}
-            />
-          </>
-          <Footer>
-            <Button
-              title={data.button}
-              onPress={onPressButton}
-              disabled={!isInputFilled}
-            />
-          </Footer>
-        </Form>
+        <Feedback>
+          <Form>
+            <>
+              <Emoji>{isInputFilled ? data.emojiFilled : data.emoji}</Emoji>
+              <Title>{data.title}</Title>
+              <Input
+                placeholder={data.inputPlaceholder}
+                onBlur={onInputBlur}
+                onFocus={onInputFocus}
+                onChangeText={onInputChange}
+                isInputValid={isInputFocused || isInputFilled}
+              />
+            </>
+            <Footer>
+              <Button
+                title={data.button}
+                onPress={onPressButton}
+                disabled={!isInputFilled}
+              />
+            </Footer>
+          </Form>
+        </Feedback>
       </Container>
     </Screen>
   );
