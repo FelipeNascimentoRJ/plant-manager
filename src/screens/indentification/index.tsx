@@ -12,9 +12,6 @@ import {
   Footer,
 } from './styles';
 
-import Storage from '../../utils/storage';
-import Constants from '../../utils/constants';
-
 import Button from '../../components/button';
 
 const data = {
@@ -28,7 +25,7 @@ const data = {
 const IdentificationScreen = () => {
   const navigation = useNavigation();
 
-  const [name, setName] = useState<string>('');
+  const [name, setName] = useState<string>();
   const [isInputFocused, setIsInputFocused] = useState<boolean>(false);
   const [isInputFilled, setIsInputFilled] = useState<boolean>(false);
 
@@ -46,8 +43,7 @@ const IdentificationScreen = () => {
     setName(value);
   };
 
-  const onPressButton = async () => {
-    await Storage.set(Constants.STORAGE_USER, JSON.stringify({ name, image: '' }));
+  const onPressButton = () => {
     navigation.navigate('ConfirmationScreen');
   };
 
@@ -71,7 +67,7 @@ const IdentificationScreen = () => {
               <Button
                 title={data.button}
                 onPress={onPressButton}
-                disabled={!isInputFilled || name.length < 3}
+                disabled={!isInputFilled}
               />
             </Footer>
           </Form>
