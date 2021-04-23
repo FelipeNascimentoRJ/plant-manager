@@ -1,5 +1,6 @@
 import axios, { AxiosInstance, AxiosResponse } from 'axios';
 
+import Constants from '../utils/constants';
 export interface PlantEnvironment {
   key: string;
   title: string;
@@ -23,7 +24,7 @@ class Api {
 
   constructor () {
     this.instance = axios.create({
-      baseURL: 'http://10.0.0.114:3000',
+      baseURL: `http://${Constants.SERVER_HOST}:${Constants.SERVER_POST}`,
     });
   }
 
