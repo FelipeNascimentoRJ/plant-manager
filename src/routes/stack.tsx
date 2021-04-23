@@ -4,6 +4,7 @@ import { createStackNavigator } from '@react-navigation/stack';
 import WelcomeScreen from '../screens/welcome';
 import IdentificationScreen from '../screens/indentification';
 import ConfirmationScreen from '../screens/confirmation';
+import PlantSelectScreen from '../screens/plant-select';
 
 import colors from '../utils/colors';
 
@@ -31,6 +32,10 @@ const StackNavigation = () => {
       <Stack.Screen
         name="ConfirmationScreen"
         component={ConfirmationScreen}
+      />
+      <Stack.Screen
+        name="PlantSelectScreen"
+        component={PlantSelectScreen}
       />
     </Stack.Navigator>
   );

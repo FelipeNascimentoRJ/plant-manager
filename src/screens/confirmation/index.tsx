@@ -1,4 +1,5 @@
 import React from 'react';
+import { useNavigation } from '@react-navigation/core';
 
 import { Screen, Container, Emoji, Title, Description, Footer } from './styled';
 
@@ -12,8 +13,10 @@ const data = {
 };
 
 const ConfirmationScreen = () => {
+  const navigation = useNavigation();
+
   const onPressButton = () => {
-    console.log('onPressButton');
+    navigation.navigate('PlantSelectScreen');
   };
 
   return (

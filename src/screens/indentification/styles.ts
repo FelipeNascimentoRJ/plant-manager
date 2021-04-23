@@ -9,7 +9,6 @@ export const Screen = styled.SafeAreaView`
   width: 100%;
   align-items: center;
   justify-content: space-around;
-  color: ${colors.white};
 `;
 
 export const Container = styled.KeyboardAvoidingView.attrs({
