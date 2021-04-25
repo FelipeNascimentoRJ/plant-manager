@@ -1,12 +1,12 @@
 import React from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
 
+import AuthRoutes from './tab';
+
 import WelcomeScreen from '../screens/welcome';
 import IdentificationScreen from '../screens/indentification';
 import ConfirmationScreen from '../screens/confirmation';
-import PlantSelectScreen from '../screens/plant-select';
 import PlantSaveScreen from '../screens/plant-save';
-import PlantSavedScreen from '../screens/plant-saved';
 
 import colors from '../utils/colors';
 
@@ -37,7 +37,7 @@ const StackNavigation = () => {
       />
       <Stack.Screen
         name="PlantSelectScreen"
-        component={PlantSelectScreen}
+        component={AuthRoutes}
       />
       <Stack.Screen
         name="PlantSaveScreen"
@@ -45,7 +45,7 @@ const StackNavigation = () => {
       />
       <Stack.Screen
         name="PlantSavedScreen"
-        component={PlantSavedScreen}
+        component={AuthRoutes}
       />
     </Stack.Navigator>
   );

@@ -5,6 +5,7 @@ import colors from '../../utils/colors';
 
 export const Screen = styled.SafeAreaView`
   flex: 1;
+  background-color: ${colors.background};
 `;
 
 export const Container = styled.View`
