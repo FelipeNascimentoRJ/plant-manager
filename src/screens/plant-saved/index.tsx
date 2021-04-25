@@ -53,38 +53,42 @@ const PlantSavedScreen = () => {
 
       const plants = JSON.parse(plantsSaved);
 
+      const plantsMap = (key: string) => {
+        const plant: Plant = plants[key];
+
+        return {
+          ...plant,
+          hour: time(new Date(plant.dateTimeNotification)),
+        };
+      };
+
+      const plantsSort = (a: Plant, b: Plant) => {
+        const timeA = new Date(a.dateTimeNotification).getTime();
+        const timeB = new Date(b.dateTimeNotification).getTime();
+
+        if (timeA > timeB) {
+          return 1;
+        }
+
+        if (timeA < timeB) {
+          return -1;
+        }
+
+        return 0;
+      };
+
       const plantsSorted = Object
         .keys(plants)
-        .map((key: string) => {
-          const plant: Plant = plants[key];
+        .map(plantsMap)
+        .sort(plantsSort);
 
-          return {
-            ...plant,
-            hour: time(new Date(plant.dateTimeNotification)),
-          };
-        })
-        .sort((a, b) => {
-          const timeA = new Date(a.dateTimeNotification).getTime();
-          const timeB = new Date(b.dateTimeNotification).getTime();
+      setPlants(plantsSorted);
 
-          if (timeA > timeB) {
-            return 1;
-          }
+      const [plant] = plantsSorted;
+      const nextDistance = distance(plant.dateTimeNotification)
+      const nextMessage = `Não esqueça de regar a ${plant.name} em ${nextDistance}`;
 
-          if (timeA < timeB) {
-            return -1;
-          }
-
-          return 0;
-        });
-
-        setPlants(plantsSorted);
-
-        const [plant] = plantsSorted;
-        const nextDistance = distance(plant.dateTimeNotification)
-        const nextMessage = `Não esqueça de regar a ${plant.name} em ${nextDistance}`;
-
-        setNextWaterd(nextMessage);
+      setNextWaterd(nextMessage);
     } catch (error) {
       Alert.alert(data.alertTextPlantLoad);
     }
