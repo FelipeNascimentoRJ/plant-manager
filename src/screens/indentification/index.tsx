@@ -51,7 +51,16 @@ const IdentificationScreen = () => {
   const onPressButton = async () => {
     try {
       await Storage.set(Constants.STORAGE_USER, JSON.stringify({ name, image: '' }));
-      navigation.navigate('ConfirmationScreen');
+
+      const params = {
+        icon: 'smile',
+        title: 'Prontinho',
+        description: 'Agora vamos começar a cuidar das\nsuas plantinhas com muito cuidado.',
+        buttonTitle: 'Começar',
+        nextScreen: 'PlantSelectScreen',
+      };
+
+      navigation.navigate('ConfirmationScreen', params);
     } catch (error) {
       Alert.alert(data.alertTextUserSave);
     }

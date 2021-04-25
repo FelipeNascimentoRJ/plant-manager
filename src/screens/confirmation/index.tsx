@@ -1,33 +1,55 @@
 import React from 'react';
-import { useNavigation } from '@react-navigation/core';
+import { useNavigation, useRoute } from '@react-navigation/core';
 
-import { Screen, Container, Emoji, Title, Description, Footer } from './styled';
+import {
+  Screen,
+  Container,
+  Emoji,
+  Title,
+  Description,
+  Footer
+} from './styled';
 
 import Button from '../../components/button';
 
-const data = {
-  emoji: '😄',
-  title: 'Prontinho',
-  description: 'Agora vamos começar a cuidar das\nsuas plantinhas com muito cuidado.',
-  button: 'Começar',
+export interface RouteParams {
+  icon: 'smile' | 'hug';
+  title: string;
+  description: string;
+  buttonTitle: string;
+  nextScreen: string;
+}
+
+const emojis = {
+  smile: '😄',
+  hug: '🤗',
 };
 
 const ConfirmationScreen = () => {
+  const route = useRoute();
   const navigation = useNavigation();
 
+  const {
+    icon,
+    title,
+    description,
+    buttonTitle,
+    nextScreen,
+  } = route.params as RouteParams;
+
   const onPressButton = () => {
-    navigation.navigate('PlantSelectScreen');
+    navigation.navigate(nextScreen);
   };
 
   return (
     <Screen>
       <Container>
-        <Emoji>{data.emoji}</Emoji>
-        <Title>{data.title}</Title>
-        <Description>{data.description}</Description>
+        <Emoji>{emojis[icon]}</Emoji>
+        <Title>{title}</Title>
+        <Description>{description}</Description>
         <Footer>
             <Button
-              title={data.button}
+              title={buttonTitle}
               onPress={onPressButton}
             />
           </Footer>

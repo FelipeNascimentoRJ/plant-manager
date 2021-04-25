@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Platform, Alert } from 'react-native';
-import { useRoute } from '@react-navigation/core';
+import { useRoute, useNavigation } from '@react-navigation/core';
 import { Event } from '@react-native-community/datetimepicker';
 
 import {
@@ -42,6 +42,7 @@ const data = {
 
 const PlantSaveScreen = () => {
   const route = useRoute();
+  const navigation = useNavigation();
 
   const [selectedDateTime, setSelectedDateTime] = useState<Date>(new Date);
   const [showDatePicker, setShowDatePicker] = useState<boolean>(Platform.OS === 'ios');
@@ -95,6 +96,16 @@ const PlantSaveScreen = () => {
         Constants.STORAGE_PLANTS,
         JSON.stringify(plants)
       );
+
+      const params = {
+        icon: 'hug',
+        title: 'Tudo certo',
+        description: 'Fique tranquilo(a) que sempre vamos lembrar você de cuidar da sua plantinha.',
+        buttonTitle: 'Muito obrigado :D',
+        nextScreen: 'PlantSavedScreen',
+      };
+
+      navigation.navigate('ConfirmationScreen', params);
     } catch (error) {
       Alert.alert(data.alertTextPlantSave);
     }
