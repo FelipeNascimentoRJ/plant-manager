@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigation } from '@react-navigation/core';
+import { Alert } from 'react-native';
 
 import {
   Screen,
@@ -23,6 +24,7 @@ const data = {
   title: 'Como podemos\nchamar você?',
   inputPlaceholder: 'Digite seu nome',
   button: 'Confirmar',
+  alertTextUserSave: 'Não foi possível salvar seu nome. 😭',
 };
 
 const IdentificationScreen = () => {
@@ -47,8 +49,12 @@ const IdentificationScreen = () => {
   };
 
   const onPressButton = async () => {
-    await Storage.set(Constants.STORAGE_USER, JSON.stringify({ name, image: '' }));
-    navigation.navigate('ConfirmationScreen');
+    try {
+      await Storage.set(Constants.STORAGE_USER, JSON.stringify({ name, image: '' }));
+      navigation.navigate('ConfirmationScreen');
+    } catch (error) {
+      Alert.alert(data.alertTextUserSave);
+    }
   };
 
   return (

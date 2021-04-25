@@ -5,6 +5,7 @@ import WelcomeScreen from '../screens/welcome';
 import IdentificationScreen from '../screens/indentification';
 import ConfirmationScreen from '../screens/confirmation';
 import PlantSelectScreen from '../screens/plant-select';
+import PlantSaveScreen from '../screens/plant-save';
 
 import colors from '../utils/colors';
 
@@ -36,6 +37,10 @@ const StackNavigation = () => {
       <Stack.Screen
         name="PlantSelectScreen"
         component={PlantSelectScreen}
+      />
+      <Stack.Screen
+        name="PlantSaveScreen"
+        component={PlantSaveScreen}
       />
     </Stack.Navigator>
   );

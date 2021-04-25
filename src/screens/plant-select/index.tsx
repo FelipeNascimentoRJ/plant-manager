@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { useNavigation } from '@react-navigation/core';
 
 import {
   Screen,
@@ -25,6 +26,8 @@ const data = {
 };
 
 const PlantSelectScreen = () => {
+  const navigation = useNavigation();
+
   const [loading, setLoading] = useState<boolean>(false);
   const [loadingMore, setLoadingMore] = useState<boolean>(false);
 
@@ -127,7 +130,7 @@ const PlantSelectScreen = () => {
     const { name, photo } = item;
 
     const onPress = () => {
-      console.log(name);
+      navigation.navigate('PlantSaveScreen', { plant: item });
     };
 
     return (
@@ -171,7 +174,7 @@ const PlantSelectScreen = () => {
         <PlantsCardPrimaryList
           data={environmentSelected !== 'all' ? plants.filter(filterPlants) : plants}
           renderItem={renderPlantCard}
-          keyExtractor={(item: Plant) => `${item.name}`}
+          keyExtractor={(item: Plant) => `${item.id}-${item.name}`}
           onEndReachedThreshold={0.1}
           onEndReached={onEndReached}
           ListFooterComponent={loadingMore && <PlantsCardPrimaryListLoading />}

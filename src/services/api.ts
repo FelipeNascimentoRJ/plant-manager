@@ -17,6 +17,7 @@ export interface Plant {
     times: number;
     repeat_every: string;
   };
+  dateTimeNotification: Date;
 }
 
 class Api {
