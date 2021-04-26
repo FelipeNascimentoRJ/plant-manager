@@ -22,7 +22,6 @@ export const Title = styled.Text`
   margin-top: 38px;
   font-family: ${fonts.heading};
   font-size: 32px;
-  font-weight: bold;
   text-align: center;
   line-height: 38px;
   color: ${colors.heading};

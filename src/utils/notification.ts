@@ -8,6 +8,9 @@ export enum PermissionStatus {
   DENIED = "denied"
 }
 
+export type NotificationType = ExpoNotifications.Notification;
+export type NotificationResponseType = ExpoNotifications.NotificationResponse;
+
 export default class Notifications {
   static async requestPermissions(): Promise<PermissionStatus> {
     const { status } = await ExpoNotifications
@@ -35,6 +38,14 @@ export default class Notifications {
     });
 
     return notificationId;
+  }
+
+  static received(listener: (event: NotificationType) => void) {
+    return ExpoNotifications.addNotificationReceivedListener(listener);
+  }
+
+  static response(listener: (event: NotificationResponseType) => void) {
+    return ExpoNotifications.addNotificationResponseReceivedListener(listener);
   }
 
   static async cancel(notificationId: string) {

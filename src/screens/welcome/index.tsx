@@ -11,6 +11,8 @@ import {
   ButtonIcon,
 } from './styles';
 
+import Storage from '../../utils/storage';
+import Constants from '../../utils/constants';
 import Notifications from '../../utils/notification';
 import wateringImg from '../../assets/watering.png';
 
@@ -22,7 +24,16 @@ const data = {
 const WelcomeScreen = () => {
   const navigation = useNavigation();
 
+  const loadUserName = async () => {
+    const stored = await Storage.get(Constants.STORAGE_USER);
+
+    if (stored) {
+      navigation.navigate('PlantSelectScreen');
+    }
+  };
+
   useEffect(() => {
+    loadUserName();
     Notifications.requestPermissions();
   }, []);
 
