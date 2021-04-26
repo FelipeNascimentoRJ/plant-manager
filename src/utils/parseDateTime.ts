@@ -54,7 +54,7 @@ const parseDateTime = (
 	utc = '-03:00',
 ): ParseDateTimeCalculationProps => {
 	const now = new Date();
-	const date = new Date(`${strDate.split('.')[0]}${utc}`);
+	const date = new Date(`${strDate}${utc}`);
 	const diff = now.getTime() - date.getTime();
 	const isFuture = now.getTime() < date.getTime();
 

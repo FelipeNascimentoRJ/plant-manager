@@ -28,6 +28,11 @@ import waterDrop from '../../assets/waterdrop.png';
 const data = {
   plantsCardSecondaryTitle: 'Próximas regadas',
   alertTextPlantLoad: `Não foi possível carregar as plantas. 😭`,
+  alertTextPlantDeleteTitle: 'Deletar',
+  alertTextPlantDeleteQuestion: (name: string) => `Deseja deletar a planta ${name}?`,
+  alertTextPlantDeleteCancel: 'Não 🙏🏽',
+  alertTextPlantDeleteConfirm: 'Sim 😭',
+  alertTextPlantDelete: `Não foi possível deletar a planta. 😭`,
 };
 
 const PlantSavedScreen = () => {
@@ -82,13 +87,18 @@ const PlantSavedScreen = () => {
         .map(plantsMap)
         .sort(plantsSort);
 
-      setPlants(plantsSorted);
+      if (plantsSorted.length >= 1) {
+        setPlants(plantsSorted);
 
-      const [plant] = plantsSorted;
-      const nextDistance = distance(plant.dateTimeNotification)
-      const nextMessage = `Não esqueça de regar a ${plant.name} em ${nextDistance}`;
+        const [plant] = plantsSorted;
+        const nextDistance = distance(plant.dateTimeNotification);
+        const nextMessage = nextDistance?.replace('[name]', plant.name);
 
-      setNextWaterd(nextMessage);
+        setNextWaterd(nextMessage);
+      } else {
+        setPlants([]);
+        setNextWaterd('');
+      }
     } catch (error) {
       Alert.alert(data.alertTextPlantLoad);
     }
@@ -96,18 +106,67 @@ const PlantSavedScreen = () => {
     setLoading(false);
   };
 
+  const deletePlants = async (id: number) => {
+    try {
+      const plantsSaved = await Storage.get(
+        Constants.STORAGE_PLANTS
+      );
+
+      if (!plantsSaved) {
+        return;
+      }
+
+      const plants = JSON.parse(plantsSaved);
+
+      delete plants[id];
+
+      await Storage.set(
+        Constants.STORAGE_PLANTS,
+        JSON.stringify(plants)
+      );
+
+      setPlants(oldData => {
+        return oldData.filter((plant) => plant.id !== id);
+      });
+    } catch (error) {
+      Alert.alert(data.alertTextPlantDelete);
+    }
+  };
+
   type PlantsCardSecondaryListItem = {
     item: Plant;
   };
 
   const renderPlantCard = ({ item }: PlantsCardSecondaryListItem) => {
-    const { name, photo, hour } = item;
+    const { id, name, photo, hour } = item;
+
+    const onPressPlantDeleteConfirm = async () => {
+      await deletePlants(id);
+    };
+
+    const onPressPlantDelete = () => {
+      Alert.alert(
+        data.alertTextPlantDeleteTitle,
+        data.alertTextPlantDeleteQuestion(name),
+        [
+          {
+            text: data.alertTextPlantDeleteCancel,
+            style: 'cancel',
+          },
+          {
+            text: data.alertTextPlantDeleteConfirm,
+            onPress: onPressPlantDeleteConfirm,
+          }
+        ],
+      );
+    };
 
     return (
       <PlantCardSecondary
         name={name}
         photo={photo}
         hour={hour}
+        onPressPlantDelete={onPressPlantDelete}
       />
     );
   }
@@ -122,10 +181,12 @@ const PlantSavedScreen = () => {
         <HeaderContainer>
           <Header />
         </HeaderContainer>
-        <TipContainer>
-          <TipImage source={waterDrop} />
-          <TipText>{nextWaterd}</TipText>
-        </TipContainer>
+        {plants.length >= 1 && (
+          <TipContainer>
+            <TipImage source={waterDrop} />
+            <TipText>{nextWaterd}</TipText>
+          </TipContainer>
+        )}
         <PlantsCardSecondaryContainer>
           <PlantsCardSecondaryTitle>
             {data.plantsCardSecondaryTitle}

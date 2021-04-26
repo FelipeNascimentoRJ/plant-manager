@@ -1,4 +1,6 @@
 import styled from 'styled-components/native';
+import { Animated } from 'react-native';
+import { Feather } from '@expo/vector-icons';
 import { SvgFromUri } from 'react-native-svg';
 
 import fonts from '../../utils/fonts';
@@ -45,3 +47,26 @@ export const Hour = styled.Text`
   font-size: 16px;
   color: ${colors.body_dark};
 `;
+
+export const PlantDeletedAnimated = styled(Animated.View)``;
+
+export const PlantDeletedContainer = styled.View``;
+
+export const PlantDeletedButton = styled.TouchableOpacity`
+  position: relative;
+  right: 20px;
+  margin-top: 22px;
+  padding-left: 15px;
+  width: 120px;
+  height: 85px;
+  align-items: center;
+  justify-content: center;
+  background-color: ${colors.red};
+  border-radius: 20px;
+`;
+
+export const PlantDeletedButtonIcon = styled(Feather).attrs({
+  name: 'trash',
+  size: 32,
+  color: colors.white,
+})``;

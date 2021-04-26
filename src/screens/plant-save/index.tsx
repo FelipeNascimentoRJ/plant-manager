@@ -20,7 +20,7 @@ import {
   TimePickerButtonText,
 } from './styles';
 
-import { time } from '../../utils/date';
+import { dateTime, time } from '../../utils/date';
 import Storage from '../../utils/storage';
 import Constants from '../../utils/constants';
 
@@ -82,7 +82,7 @@ const PlantSaveScreen = () => {
         const newPlant = {
           [plant.id]: {
             ...plant,
-            dateTimeNotification: selectedDateTime,
+            dateTimeNotification: dateTime(selectedDateTime),
           }
         };
 
