@@ -28,15 +28,19 @@ const data = {
 const Header = () => {
   const [user, setUser] = useState<User>(data.user);
 
-  const loadUserName = async () => {
-    const stored = await Storage.get(Constants.STORAGE_USER);
-    const user = stored ? JSON.parse(stored) : data.user;
-    setUser(user);
-  };
-
   useEffect(() => {
     loadUserName();
   }, []);
+
+  const loadUserName = async () => {
+    const stored = await Storage.get(Constants.STORAGE_USER);
+
+    if (stored) {
+      const user = JSON.parse(stored);
+
+      setUser(user);
+    }
+  };
 
   const userAvatar = user.image ? { uri: user.image } : avatar;
 

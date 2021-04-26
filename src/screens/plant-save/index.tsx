@@ -20,9 +20,10 @@ import {
   TimePickerButtonText,
 } from './styles';
 
-import { dateTime, time } from '../../utils/date';
 import Storage from '../../utils/storage';
 import Constants from '../../utils/constants';
+import { dateTime, time } from '../../utils/date';
+import Notifications from '../../utils/notification';
 
 import { Plant } from '../../services/api';
 import Button from '../../components/button';
@@ -68,6 +69,27 @@ const PlantSaveScreen = () => {
     setShowDatePicker(oldState => !oldState);
   };
 
+  const notificationSchedule = async (plant: Plant): Promise<string> => {
+    const now = new Date();
+    const nextTime = selectedDateTime;
+    const { times, repeat_every } = plant.frequency;
+
+    if (repeat_every === 'week') {
+      const interval = Math.trunc(7 / times);
+      nextTime.setDate(now.getDate() + interval);
+    } else {
+      nextTime.setDate(nextTime.getDate() + 1);
+    }
+
+    const seconds = Math.abs(
+      Math.ceil(now.getTime() - nextTime.getTime()) / 1000
+    );
+
+    const notificationId = await Notifications.schedule(plant, seconds);
+
+    return notificationId;
+  };
+
   const onPressButton = async () => {
     try {
       let plants = {};
@@ -76,6 +98,8 @@ const PlantSaveScreen = () => {
         Constants.STORAGE_PLANTS
       );
 
+      const notificationId = await notificationSchedule(plant);
+
       if (plantsSaved) {
         const oldPlants = JSON.parse(plantsSaved);
 
@@ -83,6 +107,7 @@ const PlantSaveScreen = () => {
           [plant.id]: {
             ...plant,
             dateTimeNotification: dateTime(selectedDateTime),
+            notificationId,
           }
         };
 

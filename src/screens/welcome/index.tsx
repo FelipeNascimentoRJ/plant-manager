@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useNavigation } from '@react-navigation/core';
 
 import {
@@ -11,6 +11,7 @@ import {
   ButtonIcon,
 } from './styles';
 
+import Notifications from '../../utils/notification';
 import wateringImg from '../../assets/watering.png';
 
 const data = {
@@ -20,6 +21,10 @@ const data = {
 
 const WelcomeScreen = () => {
   const navigation = useNavigation();
+
+  useEffect(() => {
+    Notifications.requestPermissions();
+  }, []);
 
   const onPressButton = () => {
     navigation.navigate('IdentificationScreen');

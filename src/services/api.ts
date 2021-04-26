@@ -19,6 +19,7 @@ export interface Plant {
   };
   hour: string;
   dateTimeNotification: string;
+  notificationId: string;
 }
 
 class Api {

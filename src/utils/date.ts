@@ -24,7 +24,6 @@ export const dateTime = (date: Date) => {
 };
 
 export const distance = (date: string) => {
-  console.log(date);
   const { isFuture, day, hour, minute, second } = parseDateTime(date);
 
   const v = isFuture ? 'Não esqueça de regar a [name] em' : 'Esqueceu de regar a [name] há';

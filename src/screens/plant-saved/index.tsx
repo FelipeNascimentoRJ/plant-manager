@@ -16,6 +16,7 @@ import {
 import Storage from '../../utils/storage';
 import Constants from '../../utils/constants';
 import { distance, time } from '../../utils/date';
+import Notifications from '../../utils/notification';
 
 import { Plant } from '../../services/api';
 
@@ -116,7 +117,9 @@ const PlantSavedScreen = () => {
         return;
       }
 
-      const plants = JSON.parse(plantsSaved);
+      const plants: Array<Plant> = JSON.parse(plantsSaved);
+
+      await Notifications.cancel(plants[id].notificationId);
 
       delete plants[id];
 
