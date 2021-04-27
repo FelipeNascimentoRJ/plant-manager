@@ -1,7 +1,7 @@
 {
   "main": "node_modules/expo/AppEntry.js",
   "scripts": {
-    "server": "json-server ./src/services/server.json --host 192.168.1.6 --post 3333 --delay 400",
+    "server": "json-server ./src/services/server.json --host 127.0.0.1 --post 3333 --delay 400",
     "start": "expo start",
     "android": "expo start --android",
     "ios": "expo start --ios",
